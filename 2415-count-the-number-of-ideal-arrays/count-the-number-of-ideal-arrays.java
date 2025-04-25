@@ -8,15 +8,19 @@ public class Solution {
     static int[] sieve = new int[MAX_N]; // Minimum prime factor
     static List<Integer>[] ps = new List[MAX_N]; // List of prime factor counts
 
+    // Constructor to initialize the precomputation
     public Solution() {
+        // Check if already initialized
         if (c[0][0] == 1) {
             return;
         }
 
+        // Initialize prime factor list
         for (int i = 0; i < MAX_N; i++) {
             ps[i] = new ArrayList<>();
         }
 
+        // Sieve to find the smallest prime factor for each number
         for (int i = 2; i < MAX_N; i++) {
             if (sieve[i] == 0) {
                 for (int j = i; j < MAX_N; j += i) {
@@ -27,6 +31,7 @@ public class Solution {
             }
         }
 
+        // Count the prime factors for each number
         for (int i = 2; i < MAX_N; i++) {
             int x = i;
             while (x > 1) {
@@ -39,6 +44,7 @@ public class Solution {
             }
         }
 
+        // Precompute binomial coefficients
         c[0][0] = 1;
         for (int i = 1; i < MAX_N + MAX_P; i++) {
             c[i][0] = 1;
@@ -48,10 +54,13 @@ public class Solution {
         }
     }
 
+    // Method to calculate the number of ideal arrays
     public int idealArrays(int n, int maxValue) {
         long ans = 0;
+        // For each number x from 1 to maxValue
         for (int x = 1; x <= maxValue; x++) {
             long mul = 1;
+            // Calculate the number of valid sequences ending with x
             for (int p : ps[x]) {
                 mul = (mul * c[n + p - 1][p]) % MOD;
             }
