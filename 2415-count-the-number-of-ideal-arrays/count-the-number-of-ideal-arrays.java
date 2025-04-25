@@ -1,5 +1,6 @@
-class Solution {
+import java.util.*;
 
+public class Solution {
     static int MOD = 1000000007;
     static int MAX_N = 10010;
     static int MAX_P = 15; // There are up to 15 prime factors
